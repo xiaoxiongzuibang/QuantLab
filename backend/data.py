@@ -6,10 +6,14 @@ import datetime
 import base64
 import io
 
-def get_stock_data(ticker, time_range):
-    end_date = datetime.datetime.today()
-    start_date = end_date - datetime.timedelta(days = int(time_range))
-    data = yf.download(ticker, start = start_date, end = end_date)
+def get_stock_data(ticker, start, end):
+    '''由于前端datetime-local数据和这里接受的数据不太一样 因此如果使用
+    则需要使用datetime.datetime.formisoformat()来处理数据'''
+    # start = datetime.datetime.fromisoformat(start)
+    # end = datetime.datetime.fromisoformat(end)
+    start = start
+    end = end
+    data = yf.download(ticker, start = start, end = end)
     return data
 
 

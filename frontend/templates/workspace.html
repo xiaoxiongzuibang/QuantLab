@@ -11,13 +11,15 @@
         <label for="stock">Stock Ticker:</label>
         <input type="text" name="stock" id="stock" placeholder="例如 TSLA" required>
         <br><br>
-        <label for="days">Date Range:</label>
-        <input type="number" name="days" id="days" placeholder="例如 100" required>
+        <label for="start">Start Date</label>
+        <input type="date" name="start" id="start" placeholder="2020-2-22" required>
+        <br><br>
+        <label for="end">End Date</label>
+        <input type="date" name="end" id="end" placeholder="2022-2-23" required>
         <br><br>
         <button type="submit">Generate</button>
     </form>
     
-    <!-- 如果有图像数据，则显示图像 -->
     {% if image_data %}
     <h2>Stock Price Chart</h2>
     <img src="data:image/png;base64,{{ image_data }}" alt="Stock Price Chart">

@@ -16,9 +16,10 @@ def workspace():
     image_data = None
     if request.method == 'POST':
         ticker = request.form.get('stock')
-        days = request.form.get('days')
-        if ticker and days:
-            data = get_stock_data(ticker, days)
+        start = request.form.get('start')
+        end = request.form.get('end')
+        if ticker and start and end:
+            data = get_stock_data(ticker, start, end)
             image_data = plot_stock_data(data)
     return render_template("workspace.html", image_data = image_data)
 
