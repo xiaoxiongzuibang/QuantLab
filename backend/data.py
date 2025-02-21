@@ -1,12 +1,31 @@
-import tushare as ts
+import yfinance as yf
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')
+import datetime
+import base64
+import io
 
-ts.set_token("09168084438f7ab814f193d074fc1883fcab62fede31c4b2f988290e")
+def get_stock_data(ticker, time_range):
+    end_date = datetime.datetime.today()
+    start_date = end_date - datetime.timedelta(days = int(time_range))
+    data = yf.download(ticker, start = start_date, end = end_date)
+    return data
 
-pro = ts.pro_api()
-df = pro.daily(ts_code='600519.SH', start_date='20230101', end_date='20231231')
-print(df.head())
 
-plt.figure(figsize=(16, 6))
-plt.plot(df['trade_date'], df['close'])
-plt.show()
+def plot_stock_data(data):
+    plt.figure(figsize=(10,5))
+    plt.plot(data.index, data['Close'], label='Close Price')
+    plt.title('Stock Price Chart')
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.legend()
+    plt.grid(True)
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    image_data = base64.b64encode(buf.getvalue()).decode('utf8')
+    print(len(image_data))
+    plt.close()
+    return image_data
