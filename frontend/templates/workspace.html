@@ -1,28 +1,155 @@
-<!-- templates/workspace.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>QuantLab - Stock Price Chart</title>
+  <meta charset="utf-8">
+  <title>QuantLab - Back Test</title>
+  <style>
+    /* 通用样式 */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    /* 表单样式 */
+    form {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    form label {
+      display: inline-block;
+      width: 120px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    form input[type="text"],
+    form input[type="date"],
+    form select {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: calc(100% - 140px);
+      margin-bottom: 10px;
+    }
+    form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    form button:hover {
+      background-color: #2980b9;
+    }
+    /* 图像样式 */
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 20px auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto 30px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: #fff;
+      font-weight: normal;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
 </head>
 <body>
-    <h1>WorkSpace</h1>
+  <div class="container">
+    <h1>Parameter Selection</h1>
+    <!-- Basic Parameters -->
     <form method="post">
+      <div>
         <label for="stock">Stock Ticker:</label>
         <input type="text" name="stock" id="stock" placeholder="例如 TSLA" required>
-        <br><br>
-        <label for="start">Start Date</label>
+      </div>
+      <div>
+        <label for="start">Start Date:</label>
         <input type="date" name="start" id="start" placeholder="2020-2-22" required>
-        <br><br>
-        <label for="end">End Date</label>
+      </div>
+      <div>
+        <label for="end">End Date:</label>
         <input type="date" name="end" id="end" placeholder="2022-2-23" required>
-        <br><br>
-        <button type="submit">Generate</button>
+      </div>
+      <div>
+        <label for="strategy">Strategy:</label>
+        <select id="strategies" name="strategy">
+          <option value="Long">Long</option>
+          <option value="Short">Short</option>
+          <option value="MACD">MACD</option>
+        </select>
+      </div>
+      <button type="submit">Generate</button>
     </form>
     
+    <!-- Result -->
+    <h2>Back Test Result</h2>
     {% if image_data %}
-    <h2>Stock Price Chart</h2>
     <img src="data:image/png;base64,{{ image_data }}" alt="Stock Price Chart">
     {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>Stock Ticker</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Transaction</th>
+          <th>Rate of Return</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ticker}}</td>
+          <td>{{start}}</td>
+          <td>{{end}}</td>
+          <td>{{2}}</td>
+          <td>{{rate_of_return}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
