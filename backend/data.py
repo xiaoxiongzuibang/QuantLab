@@ -2,7 +2,6 @@ import yfinance as yf
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('Agg')
-import datetime
 import base64
 import io
 

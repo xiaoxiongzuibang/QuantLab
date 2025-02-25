@@ -116,7 +116,7 @@
       </div>
       <div>
         <label for="strategy">Strategy:</label>
-        <select id="strategies" name="strategy">
+        <select id="strategy" name="strategy">
           <option value="Long">Long</option>
           <option value="Short">Short</option>
           <option value="MACD">MACD</option>
@@ -126,30 +126,75 @@
     </form>
     
     <!-- Result -->
+    {% if image_data and transaction and rate_of_return %}
     <h2>Back Test Result</h2>
-    {% if image_data %}
+    <!-- Stock Price Chart -->
     <img src="data:image/png;base64,{{ image_data }}" alt="Stock Price Chart">
-    {% endif %}
+    <!-- Important Information -->
     <table>
       <thead>
+        <!-- Stock Basic Information -->
         <tr>
           <th>Stock Ticker</th>
+          <th>Exchange</th>
           <th>Start Date</th>
           <th>End Date</th>
-          <th>Transaction</th>
-          <th>Rate of Return</th>
+          <th>Duration</th>
+          <th>Volatility</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{ticker}}</td>
+          <td>{{ticker}}</td>
           <td>{{start}}</td>
           <td>{{end}}</td>
-          <td>{{2}}</td>
+          <td>{{transaction}}</td>
+          <td>{{rate_of_return}}%</td>
+        </tr>
+      </tbody>
+      <thead>
+        <!-- Return & Risk Information -->
+        <tr>
+          <th>Benchmark</th>
+          <th>Strategy Return</th>
+          <th>Outperformance</th>
+          <th>Beta</th>
+          <th>Sharp Ration</th>
+          <th>Max Drawdown</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ticker}}</td>
+          <td>{{ticker}}</td>
+          <td>{{start}}</td>
+          <td>{{end}}</td>
+          <td>{{transaction}}</td>
+          <td>{{rate_of_return}}%</td>
+        </tr>
+        <!-- Transaction Information -->
+        <tr>
+          <th>Transaction</th>
+          <th>Rate of Return</th>
+          <th>Win</th>
+          <th>Beta</th>
+          <th>Sharp Ration</th>
+          <th>Max Drawdown</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ticker}}</td>
+          <td>{{ticker}}</td>
+          <td>{{start}}</td>
+          <td>{{end}}</td>
+          <td>{{transaction}}</td>
           <td>{{rate_of_return}}%</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> 
+    {% endif %}
 </body>
 </html>
