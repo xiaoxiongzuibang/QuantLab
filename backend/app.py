@@ -5,7 +5,7 @@ from strategy import *
 app = Flask(__name__, static_folder="../frontend/static", template_folder="../frontend/templates")
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
 @app.route("/backtest", methods = ['GET', 'POST'])
