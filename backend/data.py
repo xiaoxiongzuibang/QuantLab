@@ -55,8 +55,10 @@ class Data:
 
 def plot_stock_data(data):
     plt.figure(figsize=(10,5))
-    plt.plot(data.index, data['Close'], label='Close Price')
     plt.title('Stock Price Chart')
+    plt.plot(data.index, data['Close'], label='Close Price')
+    # plot benchmark figure
+    # plt.plot(data.index, data['Close'], label='S&P 500')
     plt.xlabel('Date')
     plt.ylabel('Price')
     plt.legend()
