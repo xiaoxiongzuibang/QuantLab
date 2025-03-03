@@ -3,125 +3,73 @@
 <head>
   <meta charset="utf-8">
   <title>QuantLab - Back Test</title>
-  <style>
-    /* 通用样式 */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    h1, h2 {
-      text-align: center;
-      margin-top: 20px;
-      color: #2c3e50;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    /* 表单样式 */
-    form {
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-    form label {
-      display: inline-block;
-      width: 120px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    form input[type="text"],
-    form input[type="date"],
-    form select {
-      padding: 6px 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: calc(100% - 140px);
-      margin-bottom: 10px;
-    }
-    form button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background-color: #3498db;
-      border: none;
-      color: #fff;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    form button:hover {
-      background-color: #2980b9;
-    }
-    /* 图像样式 */
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 20px auto;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    /* 表格样式 */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0 auto 30px;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px 12px;
-      text-align: center;
-    }
-    th {
-      background-color: #3498db;
-      color: #fff;
-      font-weight: normal;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-  </style>
+  <!-- Import CSS files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
   <div class="container">
-    <h1>Parameter Selection</h1>
+    <h1>Backtest Lab</h1>
     <!-- Basic Parameters -->
     <form method="post">
       <div>
         <label for="stock">Stock Ticker:</label>
-        <input type="text" name="stock" id="stock" placeholder="例如 TSLA" required>
+        <input type="text" name="stock" id="stock" value="TSLA" required>
       </div>
       <div>
         <label for="start">Start Date:</label>
-        <input type="date" name="start" id="start" placeholder="2020-2-22" required>
+        <input type="date" name="start" id="start" value="2023-02-22" required>
       </div>
       <div>
         <label for="end">End Date:</label>
-        <input type="date" name="end" id="end" placeholder="2022-2-23" required>
+        <input type="date" name="end" id="end" value="2025-02-22" required>
       </div>
       <div>
         <label for="strategy">Strategy:</label>
         <select id="strategy" name="strategy">
           <option value="Long">Long</option>
           <option value="Short">Short</option>
+          <option value="dsma">Double Moving Average(SMA)</option>
+          <option value="dema">Double Moving Average(EMA)</option>
           <option value="MACD">MACD</option>
         </select>
       </div>
+      <!--Hidden Double Moving Average(SMA) Strategy Settings-->
+      <div id = 'dsmaoption' class = 'hidden'>
+        <label for="shorttime">Short-term SMA Periode:</label>
+        <select id="stsmap" name="ShortTermSMAPeriode">
+          <option value=10>1</option>
+          <option value=20>5</option>
+          <option value=20>10</option>
+          <option value=20>20</option>
+        </select>
+        <label for="longtime">Long-term SMA Periode:</label>
+        <select id="ltsmap" name="LongTermSMAPeriode">
+          <option value=10>10</option>
+          <option value=20>20</option>
+          <option value=20>50</option>
+          <option value=20>100</option>
+        </select>
+      </div>
+
+      <!--Hidden Double Moving Average(EMA) Strategy Settings-->
+      <div id = 'demaoption' class = 'hidden'>
+        <label for="shorttime">Short-term EMA Periode:</label>
+        <select id="stemap" name="ShortTermEMAPeriode">
+          <option value=10>1</option>
+          <option value=20>5</option>
+          <option value=20>10</option>
+          <option value=20>20</option>
+        </select>
+        <label for="longtime">Long-term EMA Periode:</label>
+        <select id="ltemap" name="LongTermEMAPeriode">
+          <option value=10>10</option>
+          <option value=20>20</option>
+          <option value=20>50</option>
+          <option value=20>100</option>
+        </select>
+      </div>
+    
       <button type="submit">Generate</button>
     </form>
     
@@ -196,5 +144,7 @@
     </table>
   </div> 
     {% endif %}
+    <!--JavaScript-->
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
 </body>
 </html>

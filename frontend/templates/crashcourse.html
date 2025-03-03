@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- 请你自己动手写一个小网页，功能要求：
+	1.	页面上有一个下拉框 <select>，里面有三个选项："红色", "绿色", "蓝色".
+	2.	当用户选择某个选项时，将页面背景色 (document.body.style.backgroundColor) 改成对应的颜色。
+	3.	如果用户选择 "蓝色"，同时在页面上显示一个 <div>，内容是 "这是你的最爱颜色吗？"（默认隐藏，只有当选择蓝色时才显示）。 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrashCourse</title>
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <!--Introduction of CrashCourse-->
-    <h2>What is a Quant System?</h2>
-    <p>
-        A Quantitative Trading System is a system which gives
-        investors a perspective of quant method. It usually include
-        four parts: data module, strategy module, backtest module and
-        trading module.
-    </p>
+    <label for = 'ColorSelection'>Color Selection</label>
+    <select name = 'ColorSelection' id = 'color'>
+        <option value = 'red'>Red</option>
+        <option value = 'green'>Green</option>
+        <option value = 'blue'>Blue</option>
+    </select>
+    <div id = 'question' class ="hidden">Is blue your favorate color?</div>
 
-    <!--Stragety part-->
-    <h2>Strategies Module</h2>
-    <p>
-        It worth spending some time learning some Classical strategies
-        for beginners. Strategies like Statistical Arbitrage, Trend 
-        Following and Machine Learning Trading are very important in
-        quant system.
-    </p>
-
-    <!--href-->
-    <a href="{{url_for('home')}}">Homepage</a>
+    <!--JavaScript-->
+    <script>
+        const ColorSelection = document.getElementById('color');
+        const Question = document.getElementById('question');
+        ColorSelection.addEventListener('change', function() {
+            document.body.style.backgroundColor = ColorSelection.value;
+            if (ColorSelection.value === 'blue') {
+            Question.classList.remove('hidden');
+        }
+        })
+    </script>
 </body>
 </html>
