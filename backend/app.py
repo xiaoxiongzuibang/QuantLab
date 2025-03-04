@@ -10,42 +10,29 @@ def index():
 
 @app.route("/backtest", methods = ['GET', 'POST'])
 def backtest():
-    ticker = None
-    start = None
-    end = None
-    strategy = None
-    image_data = None
-    transaction = None
-    ar = None
-    s_ar = None
-    outperformance = None
-    vol = None
-    # beta = None
-    if request.method == 'POST':
-        '''Request data from frontend'''
-        ticker = request.form.get('stock')
-        start = request.form.get('start')
-        end = request.form.get('end')
-        strategy = request.form.get('strategy')
+    '''获取HTML前端输入变量'''
+    context = {}
+    context['ticker'] = request.form.get('Stock')
+    context['amount'] = request.form.get('Amount')
+    context['start'] = request.form.get('Start')
+    context['end'] = request.form.get('End')
+    context['strategy'] = request.form.get('Strategy')
 
-        '''Load Data Class'''
-        data = Data(ticker, start, end)
-        stock_data = data.get_stock_data()
-        ar = data.get_ar()
-        vol = data.get_volatility()
-        image_data = plot_stock_data(stock_data)
+    '''Load Data Class'''
+    data = Data(ticker, start, end)
+    stock_data = data.get_stock_data()
+    ar = data.get_ar()
+    vol = data.get_volatility()
+    image_data = plot_stock_data(stock_data)
 
-        '''Strategy Selection'''
-        if strategy == "Long":
-            strategy = LongStrategy(stock_data)
-            s_ar = strategy.get_ar()
-            outperformance = s_ar - ar
-            transaction = strategy.get_transaction()
+    '''Strategy Selection'''
+    if strategy == "dsma":
+        strategy = DSMAStrategy(stock_data)
+        s_ar = strategy.get_ar()
+        outperformance = s_ar - ar
+        transaction = strategy.get_transaction()
 
-    return render_template("backtest.html", ticker = ticker, start = start, end = end, 
-                           image_data = image_data, ar = ar, vol = vol, outperformance = outperformance, 
-                           transaction = transaction
-                           )
+    return render_template("backtest.html", **context)
 
 if __name__ == "__main__":
     app.run(debug = True)

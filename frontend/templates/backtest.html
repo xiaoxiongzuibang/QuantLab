@@ -3,56 +3,65 @@
 <head>
   <meta charset="utf-8">
   <title>QuantLab - Back Test</title>
-  <!-- Import CSS files -->
+  <!------------------------------------ Import CSS files ---------------------------------------->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
   <div class="container">
     <h1>Backtest Lab</h1>
-    <!-- Basic Parameters -->
+    <!--------------------------------- Basic Parameters --------------------------------------->
+  <div id = 'parameters'> 
     <form method="post">
       <div>
         <label for="stock">Stock Ticker:</label>
-        <input type="text" name="stock" id="stock" value="TSLA" required>
+        <input type="text" name="Stock" id="stock" value="TSLA" required>
+      </div>
+      <div>
+        <label for="Amount">Invest Amount:</label>
+        <input name="Amount" id="Amount" value="10000" required>
       </div>
       <div>
         <label for="start">Start Date:</label>
-        <input type="date" name="start" id="start" value="2023-02-22" required>
+        <input type="date" name="Start" id="start" value="2023-02-22" required>
       </div>
       <div>
         <label for="end">End Date:</label>
-        <input type="date" name="end" id="end" value="2025-02-22" required>
+        <input type="date" name="End" id="end" value="2025-02-22" required>
       </div>
       <div>
-        <label for="strategy">Strategy:</label>
-        <select id="strategy" name="strategy">
-          <option value="Long">Long</option>
-          <option value="Short">Short</option>
+        <label for="Strategy">Strategy:</label>
+        <select id="strategy" name="Strategy">
+          <option value="long">Long</option>
+          <option value="short">Short</option>
           <option value="dsma">Double Moving Average(SMA)</option>
           <option value="dema">Double Moving Average(EMA)</option>
-          <option value="MACD">MACD</option>
+          <option value="macd">MACD</option>
         </select>
       </div>
-      <!--Hidden Double Moving Average(SMA) Strategy Settings-->
+      <!---------------------Hidden Double Moving Average(SMA) Strategy Settings-------------------->
       <div id = 'dsmaoption' class = 'hidden'>
-        <label for="shorttime">Short-term SMA Periode:</label>
+        <label for="ShortTermSMAPeriode">Short-term SMA Periode:</label>
         <select id="stsmap" name="ShortTermSMAPeriode">
           <option value=10>1</option>
           <option value=20>5</option>
           <option value=20>10</option>
           <option value=20>20</option>
         </select>
-        <label for="longtime">Long-term SMA Periode:</label>
+        <label for="LongTermSMAPeriode">Long-term SMA Periode:</label>
         <select id="ltsmap" name="LongTermSMAPeriode">
           <option value=10>10</option>
           <option value=20>20</option>
           <option value=20>50</option>
           <option value=20>100</option>
         </select>
+        <label for="DSMATransactionSetting">Transaction Setting:</label>
+        <select id="dsmatransactionsetting" name="TransactionSetting">
+          <option value='fullposition'>Fulll Position</option>
+        </select>
       </div>
 
-      <!--Hidden Double Moving Average(EMA) Strategy Settings-->
+      <!------------------------Hidden Double Moving Average(EMA) Strategy Settings------------------------>
       <div id = 'demaoption' class = 'hidden'>
         <label for="shorttime">Short-term EMA Periode:</label>
         <select id="stemap" name="ShortTermEMAPeriode">
@@ -68,15 +77,18 @@
           <option value=20>50</option>
           <option value=20>100</option>
         </select>
+        <label for="DEMATransactionSetting">Transaction Setting:</label>
+        <select id="dematransactionsetting" name="TransactionSetting">
+          <option value='fullposition'>Fulll Position</option>
+        </select>
       </div>
     
-      <button type="submit">Generate</button>
+      <button id = 'generatebutton' type="submit">Generate</button>
     </form>
-    
-    <!-- Result -->
+  </div>   
+    <!-------------------------------------------- Result ----------------------------------------------->
     {% if image_data and transaction and rate_of_return %}
     <h2>Back Test Result</h2>
-    <!-- Stock Price Chart -->
     <img src="data:image/png;base64,{{ image_data }}" alt="Stock Price Chart">
     <!-- Important Information -->
     <table>
