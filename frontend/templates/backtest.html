@@ -12,10 +12,10 @@
     <h1>Backtest Lab</h1>
     <!--------------------------------- Basic Parameters --------------------------------------->
   <div id = 'parameters'> 
-    <form method="post">
+    <form  method="post">
       <div>
         <label for="stock">Stock Ticker:</label>
-        <input type="text" name="Stock" id="stock" value="TSLA" required>
+        <input type="text" name="Ticker" id="ticker" value="TSLA" required>
       </div>
       <div>
         <label for="Amount">Invest Amount:</label>
@@ -32,11 +32,8 @@
       <div>
         <label for="Strategy">Strategy:</label>
         <select id="strategy" name="Strategy">
-          <option value="long">Long</option>
-          <option value="short">Short</option>
           <option value="dsma">Double Moving Average(SMA)</option>
           <option value="dema">Double Moving Average(EMA)</option>
-          <option value="macd">MACD</option>
         </select>
       </div>
       <!---------------------Hidden Double Moving Average(SMA) Strategy Settings-------------------->
@@ -87,9 +84,9 @@
     </form>
   </div>   
     <!-------------------------------------------- Result ----------------------------------------------->
-    {% if image_data and transaction and rate_of_return %}
+    {% if image_data %}
     <h2>Back Test Result</h2>
-    <img src="data:image/png;base64,{{ image_data }}" alt="Stock Price Chart">
+    <img src="data:image/png;base64,{{ image_data }}" alt="Backtest Chart">
     <!-- Important Information -->
     <table>
       <thead>
@@ -106,10 +103,10 @@
       <tbody>
         <tr>
           <td>{{ticker}}</td>
-          <td>{{ticker}}</td>
+          <td>Exchange</td>
           <td>{{start}}</td>
           <td>{{end}}</td>
-          <td>{{transaction}}</td>
+          <td>{{duration}}</td>
           <td>{{rate_of_return}}%</td>
         </tr>
       </tbody>
@@ -117,7 +114,7 @@
         <!-- Return & Risk Information -->
         <tr>
           <th>Benchmark</th>
-          <th>Strategy Return</th>
+          <th>Annualized Return</th>
           <th>Outperformance</th>
           <th>Beta</th>
           <th>Sharp Ration</th>
@@ -127,10 +124,10 @@
       <tbody>
         <tr>
           <td>{{ticker}}</td>
-          <td>{{ticker}}</td>
+          <td>{{annual_return}}</td>
           <td>{{start}}</td>
           <td>{{end}}</td>
-          <td>{{transaction}}</td>
+          <td>{{sharpe_ratio}}</td>
           <td>{{rate_of_return}}%</td>
         </tr>
         <!-- Transaction Information -->

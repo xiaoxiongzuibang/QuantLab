@@ -71,3 +71,4 @@ def plot_stock_data(data):
     print(len(image_data))
     plt.close()
     return image_data
+
