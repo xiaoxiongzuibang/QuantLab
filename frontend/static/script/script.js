@@ -1,21 +1,14 @@
 // Identify Strategy Selected By Users
 const StrategySelection = document.getElementById('strategy')
-const Start = document.getElementById('start')
-const End = document.getElementById('end')
-let duration = Start - End
-
 const DSMAOption = document.getElementById('dsmaoption')
-const dsma_shortperiod = document.getElementById('stsmap')
-const dsma_longperiod = document.getElementById('ltsmap')
-
 const DEMAOption = document.getElementById('demaoption')
-const dema_shortperiod = document.getElementById('stemap')
-const dema_longperiod = document.getElementById('ltemap')
+// const Start = document.getElementById('start')
+// const End = document.getElementById('end')
 
 // const MACDOption = document.getElementById('macdoption')
 const ObjList = [DSMAOption, DEMAOption]
 const Parameters = document.getElementById('parameters')
-const GenerateButton = document.getElementById('generate button')
+const GenerateButton = document.getElementById('generatebutton')
 
 // Listen Strategy Selector
 StrategySelection.addEventListener('change', function() {
@@ -35,22 +28,38 @@ StrategySelection.addEventListener('change', function() {
 
 })
 
-// Different Strategies requires minimum data
-// For exemple, DSMAStrategy(5,20) requires at least 20 data
-if (StrategySelection.value === 'dsma') {
-    if (duration < dsma_longperiod) {
-        alert('More data needed!')
-    }
-}
-else if (StrategySelection.value === 'dema') {
-    if (duration < dsma_longperiod) {
-        alert('More data needed!')
-    }
-}
 
 // Listen Generate Button
 GenerateButton.addEventListener('click', function() {
-    Parameters.classList.add('hidden')
+    
+    // Different Strategies requires minimum data
+    // For exemple, DSMAStrategy(5,20) requires at least 20 data
+    const Start = document.getElementById('start')
+    const End = document.getElementById('end')
+    const StartStr = Start.value
+    const EndStr = EndObj.value
+    const StartDate = new Date(StartStr)
+    const EndDate = new Date(EndStr)
+    const diff1 = EndDate - StartDate
+    const diff = diff1 / (3600*1000*24)
+
+    if (StrategySelection.value === "dsma") {
+        const dsma_longperiod = document.getElementById('ltsmap')
+        if (diff < dsma_longperiod.value) {
+            alert('More data needed!')
+        }
+        }
+    else if (StrategySelection.value === "dema") {
+        const dema_longperiod = document.getElementById('ltemap')
+        if (diff < dema_longperiod.value) {
+            alert('More data needed!')
+        }
+        }
+
 })
+
+
+
+
 
 

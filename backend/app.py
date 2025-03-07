@@ -52,7 +52,8 @@ def backtest():
         cerebro =  MyCerebro()
         data = bt.feeds.PandasData(dataname = dataframe, timeframe = bt.TimeFrame.Days)
         cerebro.adddata(data)
-        cerebro.addstrategy(strategy_dic[context['strategy']])
+        if context['strategy'] == 'dsma':
+            cerebro.addstrategy(strategy_dic[context['strategy']])
         cerebro.broker.setcash(10000.0)
         cerebro.broker.setcommission(commission = 0.0005)
         cerebro.addsizer(bt.sizers.PercentSizer, percents = 90)
