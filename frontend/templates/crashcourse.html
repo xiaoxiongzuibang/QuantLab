@@ -1,39 +1,52 @@
+<!-- templates/layout.html -->
 <!DOCTYPE html>
-<html lang="en">
-    <!-- 请你自己动手写一个小网页，功能要求：
-	1.	页面上有一个下拉框 <select>，里面有三个选项："红色", "绿色", "蓝色".
-	2.	当用户选择某个选项时，将页面背景色 (document.body.style.backgroundColor) 改成对应的颜色。
-	3.	如果用户选择 "蓝色"，同时在页面上显示一个 <div>，内容是 "这是你的最爱颜色吗？"（默认隐藏，只有当选择蓝色时才显示）。 -->
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <title>{% block title %}My Crash Course{% endblock %}</title>
     <style>
-        .hidden {
-            display: none;
-        }
+      /* 基本的布局样式 */
+      .container {
+        display: flex;
+      }
+      nav {
+        width: 200px;
+        background-color: #f0f0f0;
+        padding: 1rem;
+      }
+      main {
+        flex: 1;
+        padding: 1rem;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      ul li a {
+        text-decoration: none;
+        display: block;
+        margin: 0.5rem 0;
+      }
     </style>
 </head>
 <body>
-    <label for = 'ColorSelection'>Color Selection</label>
-    <select name = 'ColorSelection' id = 'color'>
-        <option value = 'red'>Red</option>
-        <option value = 'green'>Green</option>
-        <option value = 'blue'>Blue</option>
-    </select>
-    <div id = 'question' class ="hidden">Is blue your favorate color?</div>
+  <div class="container">
+    <!-- 左侧导航 -->
+    <nav>
+      <h3>Chapters</h3>
+      <ul>
+        <li><a href="{{ url_for('chapter', num=1) }}">Chapter 1</a></li>
+        <li><a href="{{ url_for('chapter', num=2) }}">Chapter 2</a></li>
+        <!-- 你可以继续添加更多章节链接 -->
+      </ul>
+    </nav>
 
-    <!--JavaScript-->
-    <script>
-        const ColorSelection = document.getElementById('color');
-        const Question = document.getElementById('question');
-        ColorSelection.addEventListener('change', function() {
-            document.body.style.backgroundColor = ColorSelection.value;
-            if (ColorSelection.value === 'blue') {
-            Question.classList.remove('hidden');
-        }
-        })
-    </script>
+    <!-- 右侧主要内容区域 -->
+    <main>
+      {% block content %}
+      <!-- 子模板的正文会插入到这里 -->
+      {% endblock %}
+    </main>
+  </div>
 </body>
 </html>

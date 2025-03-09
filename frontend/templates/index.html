@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantLab</title>
+    <!------------------------------------ Import CSS files ---------------------------------------->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
 </head>
 <body>
-    
-    <!--Introduction of QuantLab-->
-    <div><h2>What's QuantLab?</h2>
-        <p>
-            QuantLab is a website focus on testing different
-            quant strategies' performeances on history data.
-            You can easily create your own strategy and test
-            it on different financial market.
-        </p></div>
-    
-    <!--href-->
-    <a href="{{url_for('crashcourse')}}">CrashCourse</a>
+   <div class="grandtitle">QuantLab</div>
+   <div class="moduleselection">
+    <div class="modulebutton" >Crash Course</div>
+    <div class="modulebutton" >Backtest Lab</div>
+    <div class="modulebutton" >Portfolio Lab</div>
+   </div>
     
 </body>
 </html>

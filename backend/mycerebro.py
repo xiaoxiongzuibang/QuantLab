@@ -9,7 +9,7 @@ class MyCerebro(bt.Cerebro):
         if self._exactbars > 0:
             return
         
-        kwargs['figsize'] = (30, 10)
+        kwargs['figsize'] = (width, height)
         kwargs['dpi'] = dpi
 
         if not plotter:
