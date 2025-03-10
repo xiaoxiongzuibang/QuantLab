@@ -30,14 +30,14 @@ StrategySelection.addEventListener('change', function() {
 
 
 // Listen Generate Button
-GenerateButton.addEventListener('click', function() {
-    
+GenerateButton.addEventListener('click', function(event) {
+    event.preventDefault()
     // Different Strategies requires minimum data
     // For exemple, DSMAStrategy(5,20) requires at least 20 data
     const Start = document.getElementById('start')
     const End = document.getElementById('end')
     const StartStr = Start.value
-    const EndStr = EndObj.value
+    const EndStr = End.value
     const StartDate = new Date(StartStr)
     const EndDate = new Date(EndStr)
     const diff1 = EndDate - StartDate
@@ -45,17 +45,19 @@ GenerateButton.addEventListener('click', function() {
 
     if (StrategySelection.value === "dsma") {
         const dsma_longperiod = document.getElementById('ltsmap')
-        if (diff < dsma_longperiod.value) {
-            alert('More data needed!')
+        if (diff < dsma_longperiod.value * 2) {
+            alert(`More data needed! You need at least ${dsma_longperiod.value * 2} days.`)
+            return
         }
         }
     else if (StrategySelection.value === "dema") {
         const dema_longperiod = document.getElementById('ltemap')
-        if (diff < dema_longperiod.value) {
-            alert('More data needed!')
+        if (diff < dema_longperiod.value * 2) {
+            alert(`More data needed! You need at least ${dema_longperiod.value * 2} days.`)
+            return
         }
         }
-
+    document.getElementById('backtestForm').submit()
 })
 
 

@@ -4,15 +4,19 @@
   <meta charset="utf-8">
   <title>QuantLab - Back Test</title>
   <!------------------------------------ Import CSS files ---------------------------------------->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/backtest.css') }}">
 </head>
 
 <body>
+  <!--------------------------------- Settings --------------------------------------->
+  <div class="navbar">
+    <a href="{{url_for('index')}}" class="navbutton">Home</a>
+  </div>
+  <div class="grandtitle">Backtest Lab</div>
   <div class="container">
-    <h1>Backtest Lab</h1>
-    <!--------------------------------- Basic Parameters --------------------------------------->
+  <!--------------------------------- Basic Parameters --------------------------------------->
   <div id = 'parameters'> 
-    <form  method="post">
+    <form id="backtestForm" method="post">
       <div>
         <label for="stock">Stock Ticker:</label>
         <input type="text" name="Ticker" id="ticker" value="TSLA" required>
@@ -20,6 +24,10 @@
       <div>
         <label for="Amount">Invest Amount:</label>
         <input name="Amount" id="Amount" value="10000" required>
+      </div>
+      <div>
+        <label for="RiskFreeRate">Risk Free Rate:</label>
+        <input name="RiskFreeRate" id="riskfreerate" value=0.02 required>
       </div>
       <div>
         <label for="start">Start Date:</label>
@@ -32,6 +40,7 @@
       <div>
         <label for="Strategy">Strategy:</label>
         <select id="strategy" name="Strategy">
+          <option value="" disabled selected>Choose a strategy</option>
           <option value="dsma">Double Moving Average(SMA)</option>
           <option value="dema">Double Moving Average(EMA)</option>
         </select>

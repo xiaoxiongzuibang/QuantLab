@@ -17,6 +17,10 @@ app = Flask(__name__, static_folder="../frontend/static", template_folder="../fr
 def index():
     return render_template("index.html")
 
+@app.route("/crashcourse")
+def crashcourse():
+    return render_template("crashcourse.html")
+
 @app.route("/backtest", methods = ['GET', 'POST'])
 def backtest():
     context = {}
@@ -32,6 +36,7 @@ def backtest():
 
         context['ticker'] = request.form.get('Ticker')
         context['amount'] = request.form.get('Amount')
+        context['riskfreerate'] = float(request.form.get('RiskFreeRate'))
         context['start'] = request.form.get('Start')
         context['end'] = request.form.get('End')
         context['duration'] = duration_days
@@ -52,15 +57,14 @@ def backtest():
         cerebro =  MyCerebro()
         data = bt.feeds.PandasData(dataname = dataframe, timeframe = bt.TimeFrame.Days)
         cerebro.adddata(data)
-        if context['strategy'] == 'dsma':
-            cerebro.addstrategy(strategy_dic[context['strategy']])
+        cerebro.addstrategy(strategy_dic[context['strategy']])
         cerebro.broker.setcash(10000.0)
         cerebro.broker.setcommission(commission = 0.0005)
         cerebro.addsizer(bt.sizers.PercentSizer, percents = 90)
 
         '''Add Analyzers'''
         cerebro.addanalyzer(bt.analyzers.AnnualReturn, _name='AnnualReturn')
-        cerebro.addanalyzer(bt.analyzers.SharpeRatio, riskfreerate=0.02, annualize=True, _name='SharpeRatio')
+        cerebro.addanalyzer(bt.analyzers.SharpeRatio, riskfreerate=context['riskfreerate'], annualize=True, _name='SharpeRatio')
 
         '''Start cerebro'''
         results = cerebro.run()
@@ -75,8 +79,6 @@ def backtest():
         sharpe_ratio = result.analyzers.SharpeRatio.get_analysis()
         ssharpe_ratio = next(iter(sharpe_ratio.values()))
         context['sharpe_ratio'] = round(ssharpe_ratio, 2)
-
-        
 
         figs = cerebro.plot(volume=False)
         fig = figs[0][0]

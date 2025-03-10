@@ -13,7 +13,7 @@ git clone https://github.com/xiaoxiongzuibang/QuantLab
 
 2. Run backend/app.py to load the project:
 ```shell
-cd backend
+cd QuantLab-main/backend
 python app.py
 ```
 

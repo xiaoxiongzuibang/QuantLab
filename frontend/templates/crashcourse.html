@@ -1,52 +1,19 @@
-<!-- templates/layout.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>{% block title %}My Crash Course{% endblock %}</title>
-    <style>
-      /* 基本的布局样式 */
-      .container {
-        display: flex;
-      }
-      nav {
-        width: 200px;
-        background-color: #f0f0f0;
-        padding: 1rem;
-      }
-      main {
-        flex: 1;
-        padding: 1rem;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-      ul li a {
-        text-decoration: none;
-        display: block;
-        margin: 0.5rem 0;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!------------------------------------ Import CSS files ---------------------------------------->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/crashcourse.css') }}">
 </head>
 <body>
-  <div class="container">
-    <!-- 左侧导航 -->
-    <nav>
-      <h3>Chapters</h3>
-      <ul>
-        <li><a href="{{ url_for('chapter', num=1) }}">Chapter 1</a></li>
-        <li><a href="{{ url_for('chapter', num=2) }}">Chapter 2</a></li>
-        <!-- 你可以继续添加更多章节链接 -->
-      </ul>
-    </nav>
-
-    <!-- 右侧主要内容区域 -->
-    <main>
-      {% block content %}
-      <!-- 子模板的正文会插入到这里 -->
-      {% endblock %}
-    </main>
+  <!--------------------------------- Settings --------------------------------------->
+  <div class="navbar">
+    <a href="{{url_for('index')}}" class="navbutton">Home</a>
   </div>
+  <div class="grandtitle">Crash Course</div>
+  <div class="container">
+  
 </body>
 </html>
