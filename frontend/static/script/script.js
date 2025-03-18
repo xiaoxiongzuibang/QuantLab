@@ -2,11 +2,12 @@
 const StrategySelection = document.getElementById('strategy')
 const DSMAOption = document.getElementById('dsmaoption')
 const DEMAOption = document.getElementById('demaoption')
+const PAIROption = document.getElementById('pairoption')
 // const Start = document.getElementById('start')
 // const End = document.getElementById('end')
 
 // const MACDOption = document.getElementById('macdoption')
-const ObjList = [DSMAOption, DEMAOption]
+const ObjList = [DSMAOption, DEMAOption, PAIROption]
 const Parameters = document.getElementById('parameters')
 const GenerateButton = document.getElementById('generatebutton')
 
@@ -24,6 +25,10 @@ StrategySelection.addEventListener('change', function() {
     else if (StrategySelection.value === "dsma") {
         DSMAOption.classList.remove('hidden')
         DSMAOption.classList.add('display')
+    }
+    else if (StrategySelection.value === "pair") {
+        PAIROption.classList.remove('hidden')
+        PAIROption.classList.add('display')
     }
 
 })

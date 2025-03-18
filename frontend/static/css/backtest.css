@@ -38,6 +38,13 @@
   color: #000000;
   user-select: none;
 }
+.textresult {
+  font-size: 10%;
+  display: block;
+}
+.result{
+  display: block;
+}
 body {
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      background-color: #f5f7fa;

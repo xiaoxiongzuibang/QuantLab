@@ -14,38 +14,20 @@
   </div>
   <div class="grandtitle">Backtest Lab</div>
   <div class="container">
-  <!--------------------------------- Basic Parameters --------------------------------------->
+  <!--------------------------------- Strategy Selection --------------------------------------->
   <div id = 'parameters'> 
     <form id="backtestForm" method="post">
-      <div>
-        <label for="stock">Stock Ticker:</label>
-        <input type="text" name="Ticker" id="ticker" value="TSLA" required>
-      </div>
-      <div>
-        <label for="Amount">Invest Amount:</label>
-        <input name="Amount" id="Amount" value="10000" required>
-      </div>
-      <div>
-        <label for="RiskFreeRate">Risk Free Rate:</label>
-        <input name="RiskFreeRate" id="riskfreerate" value=0.02 required>
-      </div>
-      <div>
-        <label for="start">Start Date:</label>
-        <input type="date" name="Start" id="start" value="2023-02-22" required>
-      </div>
-      <div>
-        <label for="end">End Date:</label>
-        <input type="date" name="End" id="end" value="2025-02-22" required>
-      </div>
+  
       <div>
         <label for="Strategy">Strategy:</label>
         <select id="strategy" name="Strategy">
           <option value="" disabled selected>Choose a strategy</option>
           <option value="dsma">Double Moving Average(SMA)</option>
           <option value="dema">Double Moving Average(EMA)</option>
+          <option value="pair">Pair Trading Strategy</option>
         </select>
       </div>
-      <!---------------------Hidden Double Moving Average(SMA) Strategy Settings-------------------->
+      <!---------------------Double Moving Average(SMA) Strategy Settings-------------------->
       <div id = 'dsmaoption' class = 'hidden'>
         <label for="ShortTermSMAPeriode">Short-term SMA Periode:</label>
         <select id="stsmap" name="ShortTermSMAPeriode">
@@ -65,6 +47,26 @@
         <select id="dsmatransactionsetting" name="TransactionSetting">
           <option value='fullposition'>Fulll Position</option>
         </select>
+        <div>
+          <label for="stock">Stock Ticker:</label>
+          <input type="text" name="Ticker" id="ticker" value="TSLA" required>
+        </div>
+        <div>
+          <label for="Amount">Invest Amount:</label>
+          <input name="Amount" id="Amount" value="10000" required>
+        </div>
+        <div>
+          <label for="RiskFreeRate">Risk Free Rate:</label>
+          <input name="RiskFreeRate" id="riskfreerate" value=0.02 required>
+        </div>
+        <div>
+          <label for="start">Start Date:</label>
+          <input type="date" name="Start" id="start" value="2023-02-22" required>
+        </div>
+        <div>
+          <label for="end">End Date:</label>
+          <input type="date" name="End" id="end" value="2025-02-22" required>
+        </div>
       </div>
 
       <!------------------------Hidden Double Moving Average(EMA) Strategy Settings------------------------>
@@ -87,81 +89,77 @@
         <select id="dematransactionsetting" name="TransactionSetting">
           <option value='fullposition'>Fulll Position</option>
         </select>
+        <div>
+          <label for="stock">Stock Ticker:</label>
+          <input type="text" name="Ticker" id="ticker" value="TSLA" required>
+        </div>
+        <div>
+          <label for="Amount">Invest Amount:</label>
+          <input name="Amount" id="Amount" value="10000" required>
+        </div>
+        <div>
+          <label for="RiskFreeRate">Risk Free Rate:</label>
+          <input name="RiskFreeRate" id="riskfreerate" value=0.02 required>
+        </div>
+        <div>
+          <label for="start">Start Date:</label>
+          <input type="date" name="Start" id="start" value="2023-02-22" required>
+        </div>
+        <div>
+          <label for="end">End Date:</label>
+          <input type="date" name="End" id="end" value="2025-02-22" required>
+        </div>
+      </div>
+
+      <!------------------------Pair Trading Strategy Settings------------------------>
+      <div id = 'pairoption' class = 'hidden'>
+        <div>
+          <label for="stock">Stock Ticker 1:</label>
+          <input type="text" name="Ticker1" id="ticker1" value="MAR" required>
+          <label for="stock">Stock Ticker 2:</label>
+          <input type="text" name="Ticker2" id="ticker2" value="HLT" required>
+        </div>
+
+        <label for="DEMATransactionSetting">Transaction Setting:</label>
+        <select id="dematransactionsetting" name="TransactionSetting">
+          <option value='fullposition'>Fulll Position</option>
+        </select>
+        <div>
+          <label for="Amount">Invest Amount:</label>
+          <input name="Amount" id="Amount" value="10000" required>
+        </div>
+        <div>
+          <label for="RiskFreeRate">Risk Free Rate:</label>
+          <input name="RiskFreeRate" id="riskfreerate" value=0.02 required>
+        </div>
+        <div>
+          <label for="start">Start Date:</label>
+          <input type="date" name="Start" id="start" value="2023-02-22" required>
+        </div>
+        <div>
+          <label for="end">End Date:</label>
+          <input type="date" name="End" id="end" value="2025-02-22" required>
+        </div>
       </div>
     
       <button id = 'generatebutton' type="submit">Generate</button>
     </form>
-  </div>   
-    <!-------------------------------------------- Result ----------------------------------------------->
+    <div>
+    
+    </div>   
+    <!----------------------------------Result------------------------------->
     {% if image_data %}
     <h2>Back Test Result</h2>
+    <div class="result">
+      {% if strategy == 'dsma' or strategy == 'dema' %}
+      <div class="textresult">Ticker: {{ticker}}</div>
+      <div class="textresult">Strategy: {{strategy}}</div>
+      {% elif strategy == 'pair' %}
+      <div class="textresult">Tickers: {{ (ticker1), (ticker2) }}</div>
+      {% endif %}
+      <div class="textresult">Strategy: Pair Trading Strategy</div>
+      <div class="textresult">Backtest Date: {{start}} -- {{end}}: {{duration}} days</div>
     <img src="data:image/png;base64,{{ image_data }}" alt="Backtest Chart">
-    <!-- Important Information -->
-    <table>
-      <thead>
-        <!-- Stock Basic Information -->
-        <tr>
-          <th>Stock Ticker</th>
-          <th>Exchange</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Duration</th>
-          <th>Volatility</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ticker}}</td>
-          <td>Exchange</td>
-          <td>{{start}}</td>
-          <td>{{end}}</td>
-          <td>{{duration}}</td>
-          <td>{{rate_of_return}}%</td>
-        </tr>
-      </tbody>
-      <thead>
-        <!-- Return & Risk Information -->
-        <tr>
-          <th>Benchmark</th>
-          <th>Annualized Return</th>
-          <th>Outperformance</th>
-          <th>Beta</th>
-          <th>Sharp Ration</th>
-          <th>Max Drawdown</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ticker}}</td>
-          <td>{{annual_return}}</td>
-          <td>{{start}}</td>
-          <td>{{end}}</td>
-          <td>{{sharpe_ratio}}</td>
-          <td>{{rate_of_return}}%</td>
-        </tr>
-        <!-- Transaction Information -->
-        <tr>
-          <th>Benchmark</th>
-          <th>Rate of Return</th>
-          <th>Win</th>
-          <th>Beta</th>
-          <th>Sharp Ration</th>
-          <th>Max Drawdown</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ticker}}</td>
-          <td>{{ticker}}</td>
-          <td>{{start}}</td>
-          <td>{{end}}</td>
-          <td>{{transaction}}</td>
-          <td>{{rate_of_return}}%</td>
-        </tr>
-      </tbody>
-    </table>
-  </div> 
-  
     {% endif %}
     <!--JavaScript-->
     <script src="{{ url_for('static', filename='script/script.js') }}"></script>
