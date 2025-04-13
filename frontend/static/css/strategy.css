@@ -1,0 +1,122 @@
+/* ====== Strategy 页面专用样式 ====== */
+.strategy-container {
+  max-width: 900px;
+  margin: 100px auto 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 大标题样式 */
+.strategy-container .grandtitle {
+  font-size: 400%;
+  text-align: center;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Verdana", sans-serif;
+  color: #2c3e50;
+  margin-top: 50px;
+}
+
+/* 隐藏与显示切换类 */
+.strategy-container .hidden {
+  display: none;
+}
+
+.strategy-container .display {
+  display: block;
+}
+
+/* 表单样式 */
+.strategy-container form {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.strategy-container form label {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.strategy-container form input[type="text"],
+.strategy-container form input[type="date"],
+.strategy-container form select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(100% - 140px);
+  margin-bottom: 10px;
+}
+
+.strategy-container form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.strategy-container form button:hover {
+  background-color: #2980b9;
+}
+
+/* 表格样式 */
+.strategy-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.strategy-container th,
+.strategy-container td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.strategy-container th {
+  background-color: #3498db;
+  color: #fff;
+  font-weight: normal;
+}
+
+.strategy-container tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.strategy-container tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 图片样式 */
+.strategy-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* 结果显示 */
+.strategy-container .textresult {
+  font-size: 12px;
+  display: block;
+}
+
+.strategy-container .result {
+  display: block;
+}

@@ -4,16 +4,15 @@
   <meta charset="utf-8">
   <title>QuantLab - Back Test</title>
   <!------------------------------------ Import CSS files ---------------------------------------->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/backtest.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/strategy.css') }}">
 </head>
 
 <body>
-  <!--------------------------------- Settings --------------------------------------->
-  <div class="navbar">
-    <a href="{{url_for('index')}}" class="navbutton">Home</a>
-  </div>
-  <div class="grandtitle">Backtest Lab</div>
-  <div class="container">
+  {% extends "base.html" %}
+
+  {% block content %}
+  <div class="strategy-container">
   <!--------------------------------- Strategy Selection --------------------------------------->
   <div id = 'parameters'> 
     <form id="backtestForm" method="post">
@@ -161,7 +160,10 @@
       <div class="textresult">Backtest Date: {{start}} -- {{end}}: {{duration}} days</div>
     <img src="data:image/png;base64,{{ image_data }}" alt="Backtest Chart">
     {% endif %}
+  </div>
+  
+    {% endblock %}
     <!--JavaScript-->
-    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/strategy.js') }}"></script>
 </body>
 </html>

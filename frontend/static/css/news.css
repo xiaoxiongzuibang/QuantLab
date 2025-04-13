@@ -1,0 +1,49 @@
+/* 仅作用于新闻页面的主容器 */
+.news-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* 只影响新闻列表，不影响全局 ul */
+.news-container .news-list {
+  list-style-type: none; /* 去掉前面的点 */
+  padding: 0;
+  margin: 0;
+}
+
+/* 新闻条目样式 */
+.news-container .news-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+/* 最后一条新闻去掉底部边框 */
+.news-container .news-item:last-child {
+  border-bottom: none;
+}
+
+/* 新闻标题样式：只影响 class="news-title" 的 a 标签 */
+.news-container .news-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+/* 鼠标悬停时效果 */
+.news-container .news-title:hover {
+  text-decoration: underline;
+}
+
+/* 新闻摘要 */
+.news-container .news-summary {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}

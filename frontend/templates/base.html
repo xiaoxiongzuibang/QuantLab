@@ -1,0 +1,29 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuantLab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="/">🏠 QuantLab</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/news">📰 News</a>
+      <a href="/strategy">📊 Strategy</a>
+      <a href="/account">👤 Account</a>
+    </div>
+  </nav>
+
+  <!-- 内容区域 -->
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

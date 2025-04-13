@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QuantLab - Back Test</title>
+  <!------------------------------------ Import CSS files ---------------------------------------->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+</head>
+
+<body>
+    {% extends "base.html" %}
+
+    {% block content %}
+    <h2 style="text-align:center;">📈 Yahoo Finance News</h2>
+    <div class="news-container">
+      <ul class="news-list">
+        {% for item in yahoo_news_data %}
+        <li class="news-item">
+          <a href="{{ item.link }}" target="_blank" class="news-title">{{ item.title }}</a>
+          <p class="news-summary">{{ item.summary }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endblock %}
+  </body>
+</html>

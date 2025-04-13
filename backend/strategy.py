@@ -54,7 +54,7 @@ class PAIRStrategy(bt.Strategy):
         ('period', 20),
         ('signal', 2),
         ('size', 10),
-        ('revert_signal', 0.25),
+        ('revert_signal', 0.05),
     )
 
     def __init__(self):
@@ -77,8 +77,8 @@ class PAIRStrategy(bt.Strategy):
             elif zscore < -self.p.signal:
                 self.sell(data = self.datas[1], size = self.p.size)
                 self.buy(data = self.datas[0], size = self.p.size)
-        if self.position:
-            if zscore > 0.25 or zscore < -0.25:
+        elif position1 != 0 and position2 != 0:
+            if zscore > self.p.revert_signal or zscore < -self.p.revert_signal:
                 pass
             if  abs(zscore) < self.p.revert_signal:
                 self.close(self.datas[0])

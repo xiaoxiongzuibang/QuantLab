@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!------------------------------------ Import CSS files ---------------------------------------->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/crashcourse.css') }}">
 </head>
 <body>
   <!--------------------------------- Settings --------------------------------------->
-  <div class="navbar">
-    <a href="{{url_for('index')}}" class="navbutton">Home</a>
-  </div>
-  <div class="grandtitle">Crash Course</div>
-  <div class="container">
-  
+  {% extends "base.html" %}
+
+  {% block content %}
+
+  {% endblock %}
 </body>
 </html>

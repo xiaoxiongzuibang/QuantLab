@@ -5,7 +5,9 @@ import base64
 import matplotlib.pyplot as plt
 import backtrader as bt
 from mycerebro import MyCerebro
+# Data Source
 import yfinance as yf
+from news import YahooFinanceData
 import datetime
 from flask import Flask, render_template, request
 from data import *
@@ -14,15 +16,19 @@ from strategy import *
 app = Flask(__name__, static_folder="../frontend/static", template_folder="../frontend/templates")
 
 @app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/crashcourse")
 def crashcourse():
     return render_template("crashcourse.html")
 
-@app.route("/backtest", methods = ['GET', 'POST'])
-def backtest():
+@app.route("/news")
+def news():
+    context = {}
+    yahoo = YahooFinanceData()
+    yahoo_news_data = yahoo.get_news_data()
+    context['yahoo_news_data'] = yahoo_news_data
+    return render_template("news.html", **context)
+
+@app.route("/strategy", methods = ['GET', 'POST'])
+def strategy():
     context = {}
     if request.method == "POST":
         
@@ -162,10 +168,10 @@ def backtest():
             img_data = base64.b64encode(buf.getvalue()).decode('utf-8')
             plt.close(fig)
             
-            return render_template("backtest.html", image_data=img_data, **context)
+            return render_template("strategy.html", image_data=img_data, **context)
 
     else:
-        return render_template("backtest.html")
+        return render_template("strategy.html")
 
 if __name__ == "__main__":
     app.run(debug = True)
